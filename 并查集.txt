@@ -1,0 +1,67 @@
+并查集 
+
+#include <bits/stdc++.h>
+#include<iostream>
+using namespace std;
+int n,m;
+int k;
+const int maxn =1001000;
+int ans[maxn];
+int vis[maxn];
+//查询祖先结点 
+int find (int x)
+{
+	if (x!= ans[x])
+	{
+		return ans[x]=find(ans[x]);
+	}
+	return x;
+}
+
+//将两个不同根结点的结点挂在同一结点下 
+void join (int a,int b)
+{
+	int aa = find (a);
+	int bb= find (b);
+	if (aa!=bb)
+	{
+		ans[bb]=aa;
+	}
+}
+
+int  main()
+{
+	ios::sync_with_stdio(false);//关闭同步输入输出流 
+	cin>>m>>n;
+	cin>>k;
+	ans[0]=0;
+	memset(vis,0,sizeof(vis));
+	//将各结点先初始化 
+	for (int i =1; i<= m*n;i++)
+	{
+		ans[i]=i;
+	}
+	//题意 输入 a1，b1 即位连接 在一起 
+	while (k--)
+	{
+		int a1 ,b1;
+		cin>>a1>>b1;
+		if (a1>b1)
+		{
+			int t=a1;
+			a1= b1;
+			b1= t;
+		}
+		join (a1,b1);//有关系的合并 
+	} 
+	
+	for (int i=1;i<=m*n;i++)
+	{
+		vis[find(i)]=1;//跟结点的 设为 1用于统计共有多少根节点 
+	}
+	int count=0;
+	for (int i=1;i<=m*n;i++)
+	count+=vis[i];
+	cout<<count<<endl;
+	return 0;
+}
