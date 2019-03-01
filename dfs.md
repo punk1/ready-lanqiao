@@ -49,7 +49,7 @@
 }
  ```
 
- 5:完整代码  题见
+ 5:完整代码  题见<https://blog.csdn.net/y1196645376/article/details/69718192>第四题
 ```
 #include <bits/stdc++.h>
 #include<iostream>
