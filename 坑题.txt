@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+#include<iostream>
+using namespace std;
+const int maxn = 31;
+double  a[maxn][maxn];
+int main()
+{
+	for (int i= 1;i<=29;i++)
+	{
+		for (int j=1;j<=i;j++)
+		{
+		  cin>>	a[i][j];
+		 } 
+	}
+	for (int i=2;i<=30;i++)
+	{
+		for (int j=1;j<=i;j++)
+		{
+			if (j==1)
+			{
+				a[i][j]+=a[i-1][j]/2;
+			}
+// 用 if 时 就会错
+			else if (j==i)
+			{
+				a[i][j]+= a[i-1][j-1]/2;
+			}
+		
+			else
+			{
+				a[i][j]+= a[i-1][j-1]/2+a[i-1][j]/2;
+			}
+		}
+	}
+	double  max=1;
+    double  min=1000;
+	for (int j=1;j<=30;j++)
+	{
+		if (a[30][j]> max)
+		{
+			max = a[30][j];
+		}
+		if (a[30][j]<min)
+		{
+			min = a[30][j];
+		}
+	}
+	//printf("%.lf\n",a[2][3]);
+	//printf("%lf %lf\n",min, max);
+	double ans = 2086458231/min * max;
+	//注意小数 输出格式 %6.2lf 表时 整数6位，小数点后两位
+	printf("%lf",ans);
+} 
